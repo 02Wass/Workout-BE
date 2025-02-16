@@ -1,0 +1,138 @@
+# Project Folder Structure for Backend (BE)
+
+This file explains the folder structure and purpose of each package in the project.
+
+---
+
+# Overall Project Structure:
+root/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com.workout/
+│   │   │       ├── controller/       <- REST API controllers (handle HTTP requests)
+│   │   │       ├── service/          <- Business logic and application rules
+│   │   │       ├── repository/       <- Database interaction (Spring Data JPA Repositories)
+│   │   │       ├── model/            <- Entity/model classes (represent database tables)
+│   │   │       └── WorkoutApplication.java  <- Main Spring Boot Application class (entry point)
+│   │   └── resources/
+│   │       ├── application.properties <- Configuration file for the application
+│   │       ├── static/         <- Static files (CSS, JS, images) for web clients (if applicable)
+│   │       ├── templates/      <- Thymeleaf templates or HTML files (if applicable)
+│   │       └── db/             <- SQL files for database initialization or migrations (optional)
+│   └── test/                   <- Unit and integration tests
+
+---
+
+# Detailed Structure:
+
+## 1. `src/main/java/com/workout/`
+This is where all the core backend logic resides. It contains sub-packages that structure the app into different layers.
+
+### `controller/`
+- Contains all the **REST API controllers**.
+- Controllers handle incoming HTTP requests (GET, POST, PUT, DELETE) and return appropriate responses.
+- Always annotated with `@RestController` or `@Controller`.
+- Controllers communicate with services for processing logic.
+
+  Example: `WorkoutController.java`
+  - Handles workout-related API operations.
+  - Example Endpoints:
+    - `GET /api/workouts` - Retrieves all workouts.
+    - `POST /api/workouts` - Creates a new workout.
+
+---
+
+### `service/`
+- Contains all **business logic** and rules of the application.
+- Services act as the intermediate layer between **controllers** and **repositories**.
+- Service classes are annotated with `@Service`.
+
+  Example: `WorkoutService.java`
+  - Saves new workouts, queries the repository for workouts, deletes workouts, etc.
+
+---
+
+### `repository/`
+- Contains all classes and interfaces for **database interactions**.
+- Typically uses **Spring Data JPA** and extends from `JpaRepository` or `CrudRepository`.
+- Performs CRUD operations (create, read, update, delete) and custom queries.
+
+  Example: `WorkoutRepository.java`
+  - Handles persistence of the `Workout` entity to the database.
+
+---
+
+### `model/`
+- Contains all **model/entity classes**, which represent database tables.
+- Annotated with JPA annotations like `@Entity`, `@Id`, and `@Table`.
+- Used by repositories for mapping database records to objects.
+
+  Example: `Workout.java`
+  - Represents a "workout" table with fields like ID, name, duration, and date.
+
+---
+
+### `WorkoutApplication.java`
+- This is the **main class** of your Spring Boot application.
+- It contains the `main()` method that starts the application.
+- Annotated with `@SpringBootApplication`, it initializes the backend and enables component scanning.
+
+---
+
+## 2. `src/main/resources/`
+The **resources** directory contains non-source code files, such as configurations, static assets, or template files.
+
+### `application.properties`
+- The configuration file for the Spring Boot application.
+- Typically used to configure:
+  - Database (e.g., MySQL/PostgreSQL) connection details.
+  - Hibernate settings (e.g., `spring.jpa.hibernate.ddl-auto`).
+  - Server settings (e.g., `server.port`).
+
+  Example:
+  ```properties
+  # Database configuration
+  spring.datasource.url=jdbc:mysql://localhost:3306/workoutdb
+  spring.datasource.username=root
+  spring.datasource.password=yourpassword
+
+  # Hibernate configuration
+  spring.jpa.hibernate.ddl-auto=update
+  ```
+
+---
+
+## 3. `src/test/`
+- Contains all **test cases** for the application.
+- You'll write both:
+  1. **Unit Tests**: For testing individual service/repository methods.
+  2. **Integration Tests**: For testing how components work together.
+- Uses JUnit and possibly Mockito/RestAssured for testing.
+
+---
+
+# Example Workflow of Backend:
+1. Controller handles HTTP requests and sends the data to the service layer.
+2. Service layer processes the data, applies business rules, and interacts with the repository.
+3. Repository interacts with the database and returns results to the service layer.
+4. Service sends back results to the controller, which formats and returns the response to the client.
+
+---
+
+# Notes:
+1. Keep the **controller**, **service**, **repository**, and **model** roles well-separated.
+2. Use `application.properties` to manage environment-specific configurations like database details.
+3. Write tests in `src/test/` to ensure your application works as expected.
+4. Place this file (`project-structure.txt`) in the **root** directory of the project for easy reference.
+
+---
+
+# Example Issue Reference:
+If unsure where to add new code:
+- New HTTP Endpoint: Add to `controller/`.
+- New Database Interaction: Add to `repository/`.
+- New Business Logic: Add to `service/`.
+- New Database Table Representation: Add to `model/`.
+
+---
