@@ -17,7 +17,7 @@ public class SensitiveUser {
         return personalId;
     }
 
-    public char[] getPassword() {
+    private char[] getPassword() {
         return password.clone();
     }
 
@@ -26,7 +26,7 @@ public class SensitiveUser {
         this.password = newPassword.clone();
     }
 
-    public void clearPassword() {
+    private void clearPassword() {
         if (password != null) {
             Arrays.fill(password, '\0');
         }
