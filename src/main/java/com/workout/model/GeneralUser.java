@@ -1,4 +1,4 @@
-package com.workout.controller;
+package com.workout.model;
 
 import java.time.LocalDate;
 

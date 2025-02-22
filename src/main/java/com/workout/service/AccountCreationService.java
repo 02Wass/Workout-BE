@@ -1,8 +1,7 @@
 package com.workout.service;
 
-import com.workout.controller.SensitiveUser;
+import com.workout.model.SensitiveUser;
 import com.workout.validator.PasswordValidator;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.time.Instant;

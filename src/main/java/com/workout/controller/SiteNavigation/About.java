@@ -1,13 +1,12 @@
-package com.workout.controller;
+package com.workout.controller.SiteNavigation;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloController {
-
-    @GetMapping("/hello")
+  public class About {
+    @GetMapping("/About")
     public String index() {
-        return "Greetings from Spring Boot!";
+      return "Page for About section";
     }
-}
+  }

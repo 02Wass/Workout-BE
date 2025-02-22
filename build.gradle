@@ -21,6 +21,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'  // Add this line
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.springframework.boot:spring-boot-devtools' // For hot-swapping
+    implementation 'org.springframework.boot:spring-boot-starter-actuator' //For Vscode
 }
 
 tasks.named('test') {
